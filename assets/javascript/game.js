@@ -36,63 +36,93 @@ var Jaws= {
 };
 
 var Movies = [Initial, Braveheart, Deadpool, Titanic, Jaws];
-
 var wins= 0;
-var movieIndex = 0;
+var movieIndex = 1;
+var x = 10;
+
+
 
 
 // Functions 
 // ========================================================================================
 
-//Function to set up the initial text and picture
-function initialSetup() {
-    document.querySelector("#movieText").innerHTML = Initial.movieText;
-    document.querySelector("#movieImage").innerHTML = '<img src= ' + Initial.moviePicture + '>';
-}
+
 
 // Function that updates the number of wins...
 function updateWins() { 
     document.querySelector("#wins").innerHTML = "Wins: " + wins;
 }
 
-function runGame() {
-    for (var i = 1; i < Movies.length; i++) {
+// Function to Run the Game.  
+
+
+    //Set up the movie text, picture and sound to be for the last word that they just guessed.
+    document.querySelector("#movieText").innerHTML = Movies[movieIndex-1].movieText;
+    document.querySelector("#movieImage").innerHTML = '<img src= ' + Movies[movieIndex-1].moviePicture + '>';
+
+    //Current word is the word on the screen that will change as they are guessing letters. For loop to first clear out the currentWord of the last word variable and then to push underscores to it for the length of the new word.
+
+    var currentWordMatrix = [];
+    var blank;
+
+        for (var i = 0; i < Movies[movieIndex].movieName.length; i++)  {
+            blank = "_";
+            currentWordMatrix.push(blank);
+        }
+
+
+     //Join the currentWordMatrix entries together to make the currentWord string
+    var currentWord = currentWordMatrix.join('');
+    return currentWord; 
+
+}
+
+    var solutionWord = Movies[movieIndex].movieName;
+
+      //Push the current word to the screen
+      document.querySelector("#currentWord").innerHTML = currentWord;
+
+    if(currentWord !== solutionWord) {
+     
+    //When user pushes a key, perform various functions. 
+
+        document.onkeydown {
+            var keyInput = event.key; 
+            document.querySelector("#guessLetter").innerHTML = keyInput
+            x = x-1; 
+            document.querySelector("#guessesRemaining").innerHTML = x;
+            console.log(keyInput);
+
+
+            if(x <= 0) {
+                gameOver()
+            }
+
+            for(var j=0, j < solutionWord)
+
+         }
         
-        document.querySelector("#movieText").innerHTML = Movies[i].movieText;
-        document.querySelector("#movieImage").innerHTML = '<img src= ' + Movies[i].moviePicture + '>';
-        var movieName = Movies[i].movieName;
+    }
 
-    console.log(movieName);
 
+
+
+
+
+function gameOver() {
+   
+    Initial.moviePicture = "assets/images/gameOver.jpg";
+    Initial.movieText = "Congratulations, you got " + wins + " out of " + Movies.length + " correct!";
 }
 
-}
+
 
 
 // Main Process 
 // ==========================================================================================
 
 // Calling functions to start the game
-initialSetup();
-updateWins();
 
-
-
-// When the user presses a key, it will run the following function...
-document.onkeyup = function(event) {
-
-    //If there are still more movies, set up the next one.
-
-    if (movieIndex <= (Movies.length-1)) {
-        runGame();
-    }
-
-    else {
-        document.querySelector("#movieText").innerHTML = "Game Over!";
-        document.querySelector("#wins").innerHTML = "Congratulations, you got  " + wins + " out of " +Movies.length + "correct!";
-    }
-
-}
 
 
 
