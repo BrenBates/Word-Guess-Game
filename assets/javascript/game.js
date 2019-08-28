@@ -2,7 +2,7 @@
 var Initial= {
     "movieText" : "Can you guess the movie?",
     "moviePicture" : "assets/images/movies.jpg",
-    "movieSound" : "/assets/mp3/CenturyFox.mp3"
+    "movieSound" : "assets/mp3/CenturyFox.mp3"
 };
 
 var Braveheart= {
@@ -44,12 +44,23 @@ var wins= 0;
 var movieIndex = 1;
 var x = 15;
 
+
 //Current word is the word on the screen that will change as they are guessing letters. For loop to first clear out the currentWord of the last word variable and then to push underscores to it for the length of the new word.
 var currentWordMatrix = [];
 
 //Create an array to store the guessed letters. 
 var lettersGuessedMatrix = [];
 
+//Make an array containing all of the audio.
+var audio = [];
+audio.length = Movies.length;
+
+for (var k = 0; k < Movies.length; k++) {
+    audio[k] = new Audio(Movies[k].movieSound);
+}
+
+//Play initial sound.
+audio[0].play();
 
 
 
@@ -84,6 +95,8 @@ var lettersGuessedMatrix = [];
    //When user pushes a key, perform various functions. 
 
        document.onkeydown = function(event) {
+
+        
        
         //Converting the keyinput to lower case.  The game won't include upper case letters.
 
@@ -129,22 +142,13 @@ var lettersGuessedMatrix = [];
            
         
             if(currentWord === solutionWord && movieIndex !== Movies.length) {
-                nextMovie()  
                 
+                nextMovie()  
 
-             for (var i = 0; i < Movies[movieIndex].movieName.length; i++)  {
-             blank = "_";
-                currentWordMatrix.push(blank);
             }
 
-    //Join the currentWordMatrix entries together to make the currentWord string.  Also, make it lower case.
-            currentWord = currentWordMatrix.join('');
-            solutionWord = Movies[movieIndex].movieName;
-
-
-    //Push the current word to the screen
-    document.querySelector("#currentWord").innerHTML = currentWord;
-
+            if(currentWord === solutionWord && movieIndex !== Movies.length) {
+               youWin()  
             }
 
 
@@ -172,8 +176,13 @@ function gameOver() {
 function nextMovie() {
     console.log('Ready for the next movie!');
 
-//movie index + 1, wins + 1 and reset currentWord and solutionWord
 
+
+    audio[movieIndex-1].pause();
+    audio[movieIndex-1].currentTime = 0;
+    audio[movieIndex].play();
+
+    //movie index + 1, wins + 1 and reset currentWord and solutionWord
     movieIndex++;
     wins++;
     x = 15;
@@ -183,6 +192,19 @@ function nextMovie() {
     //Set up the movie text, picture and sound to be for the last word that they just guessed.
     document.querySelector("#movieText").innerHTML = Movies[movieIndex-1].movieText;
     document.querySelector("#movieImage").innerHTML = '<img src= ' + Movies[movieIndex-1].moviePicture + '>';
+
+    for (var i = 0; i < Movies[movieIndex].movieName.length; i++)  {
+        blank = "_";
+           currentWordMatrix.push(blank);
+       }
+
+//Join the currentWordMatrix entries together to make the currentWord string.  Also, make it lower case.
+       currentWord = currentWordMatrix.join('');
+       solutionWord = Movies[movieIndex].movieName;
+
+
+//Push the current word to the screen
+document.querySelector("#currentWord").innerHTML = currentWord;
 
 
 }
