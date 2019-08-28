@@ -35,6 +35,11 @@ var Jaws= {
     "movieSound" : "assets/mp3/JawsTheme.mp3"
 };
 
+var GameOver = {
+    "Text" : "Game Over!",
+    "Picture" : "assets/images/gameOver.jpg"
+}
+
 
 // Set-up necessary variables for wins counter, movies index, number of guesses etc.
 //==========================================================================================
@@ -43,7 +48,7 @@ var Movies = [Initial, Braveheart, Deadpool, Titanic, Jaws];
 var wins= 0;
 var movieIndex = 1;
 var x = 15;
-
+var game_over = false;
 
 //Current word is the word on the screen that will change as they are guessing letters. For loop to first clear out the currentWord of the last word variable and then to push underscores to it for the length of the new word.
 var currentWordMatrix = [];
@@ -106,6 +111,8 @@ audio[0].play();
           
            document.querySelector("#guessesRemaining").innerHTML = x;
 
+           document.querySelector("#wins").innerHTML = wins;
+
 
            //Check if the guessed letters matrix includes the key pushed, if not add it to the list. 
            
@@ -141,7 +148,7 @@ audio[0].play();
             //Completely guessing a word will set up the next movie and increase the win count. 
            
         
-            if(currentWord === solutionWord && movieIndex !== Movies.length) {
+            if(currentWord === solutionWord && movieIndex !== Movies.length && game_over === false) {
                 
                 nextMovie()  
 
@@ -169,8 +176,10 @@ function updateWins() {
 
 function gameOver() {
    
-    Initial.moviePicture = "assets/images/gameOver.jpg";
-    Initial.movieText = "Congratulations, you got " + wins + " out of " + Movies.length + " correct!";
+    game_over = true;
+    document.querySelector("#movieImage").innerHTML= '<img src= ' + GameOver.Picture + '>';
+    document.querySelector("#movieText").innerHTML = GameOver.Text + " You got " + wins + " out of " + Movies.length + " movies!  Press SpaceBar to restart";
+    document.querySelector("#currentWord").innerHTML = 'Game is Over';
 }
 
 function nextMovie() {
@@ -185,6 +194,7 @@ function nextMovie() {
     //movie index + 1, wins + 1 and reset currentWord and solutionWord
     movieIndex++;
     wins++;
+    document.querySelector("#wins").innerHTML = wins;
     x = 15;
     currentWordMatrix = [];
     lettersGuessedMatrix = [];
