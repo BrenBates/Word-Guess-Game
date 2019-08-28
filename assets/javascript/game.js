@@ -320,7 +320,7 @@ function nextMovie() {
     movieIndex++;
     wins++;
     document.querySelector("#wins").innerHTML = wins;
-    x = 15;
+    x = 10;
     currentWordMatrix = [];
     lettersGuessedMatrix = [];
 
