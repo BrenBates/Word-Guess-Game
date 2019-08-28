@@ -37,13 +37,15 @@ var Jaws= {
 
 var GameOver = {
     "Text" : "Game Over!",
-    "Picture" : "assets/images/gameOver.jpg"
+    "Picture" : "assets/images/gameOver.jpg",
+    "Sound" : "assets/mp3/GameOverMan.mp3"
 };
 
 var Victory = {
     "Text" : "You win!",
-    "Picture" : "assets/images/Victory.jpg"
-}
+    "Picture" : "assets/images/Victory.jpg",
+    "Sound" : "assets/mp3/SurvivorEyeoftheTiger.mp3"
+};
 
 
 
@@ -170,10 +172,14 @@ audio[0].play();
 
 function runGame() {
 
+
+  
      
    //When user pushes a key, perform various functions. 
 
     document.onkeydown = function(event) {
+
+       
     
         //Converting the keyinput to lower case.  The game won't include upper case letters.
 
@@ -229,8 +235,9 @@ function runGame() {
             }
 
             if(currentWord === solutionWord && movieIndex === Movies.length) {
-               youWin()  
-            }
+                youWin()  
+             }
+          
 
 
         }
@@ -242,6 +249,8 @@ function gameOver() {
    
     audio[movieIndex-1].pause();
     audio[movieIndex-1].currentTime = 0;
+    var gameovermusic = new Audio(GameOver.Sound);
+    gameovermusic.play();
     game_over = true;
     document.querySelector("#movieImage").innerHTML= '<img src= ' + GameOver.Picture + '>';
     document.querySelector("#movieText").innerHTML = GameOver.Text + " You got " + wins + " out of " + (Movies.length-1) + " movies!  Press 'r' to restart";
@@ -264,6 +273,9 @@ function youWin() {
     
     audio[movieIndex-1].pause();
     audio[movieIndex-1].currentTime = 0;
+    var youwinaudio = new Audio(Victory.Sound);
+    youwinaudio.play();
+
     game_over = true;
     document.querySelector("#movieImage").innerHTML= '<img src= ' + Victory.Picture + '>';
     document.querySelector("#movieText").innerHTML = Victory.Text + " You got " + wins + " out of " + (Movies.length-1) + " movies!  Press 'r' to restart";
@@ -284,6 +296,8 @@ function youWin() {
 
 
 function nextMovie() {
+
+    
     console.log('Ready for the next movie!');
 
     audio[movieIndex-1].pause();
