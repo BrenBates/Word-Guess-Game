@@ -37,7 +37,7 @@ var Jaws= {
 
 var Starwars= {
     "movieName" : "starwars",
-    "movieText" : "Playing: Lord of the Rings Theme",
+    "movieText" : "Playing: Star Wars Theme",
     "moviePicture" : "assets/images/starwars.jpg",
     "movieSound" : "assets/mp3/Starwars.mp3"
 };
