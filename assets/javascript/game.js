@@ -35,6 +35,13 @@ var Jaws= {
     "movieSound" : "assets/mp3/JawsTheme.mp3"
 };
 
+var Starwars= {
+    "movieName" : "starwars",
+    "movieText" : "Playing: Lord of the Rings Theme",
+    "moviePicture" : "assets/images/starwars.jpg",
+    "movieSound" : "assets/mp3/Starwars.mp3"
+};
+
 var GameOver = {
     "Text" : "Game Over!",
     "Picture" : "assets/images/gameOver.jpg",
@@ -56,7 +63,7 @@ var Victory = {
    // Set-up necessary variables for wins counter, movies index, number of guesses etc.
 //==========================================================================================
 
-var Movies = [Initial, Braveheart, Deadpool, Titanic, Jaws];
+var Movies = [Initial, Braveheart, Deadpool, Titanic, Jaws, Starwars];
 var wins= 0;
 var movieIndex = 1;
 var x = 15;
@@ -122,6 +129,7 @@ function reset() {
 
     // Set-up necessary variables for wins counter, movies index, number of guesses etc.
 //==========================================================================================
+
 
 
 Movies = [Initial, Braveheart, Deadpool, Titanic, Jaws];
@@ -263,6 +271,8 @@ function gameOver() {
             var keyInput = event.key.toLowerCase(); 
             console.log(keyInput);
             if (keyInput === 'r') {
+                gameovermusic.pause()
+                gameovermusic.currentTime = 0;
                 reset()
             }
         }
@@ -288,6 +298,8 @@ function youWin() {
             var keyInput = event.key.toLowerCase(); 
             console.log(keyInput);
             if (keyInput === 'r') {
+                youwinaudio.pause()
+                youwinaudio.currentTime = 0;
                 reset()
             }
         }
