@@ -128,8 +128,23 @@ var lettersGuessedMatrix = [];
             //Completely guessing a word will set up the next movie and increase the win count. 
            
         
-            if(currentWord === solutionWord) {
-                nextMovie()
+            if(currentWord === solutionWord && movieIndex !== Movies.length) {
+                nextMovie()  
+                
+
+             for (var i = 0; i < Movies[movieIndex].movieName.length; i++)  {
+             blank = "_";
+                currentWordMatrix.push(blank);
+            }
+
+    //Join the currentWordMatrix entries together to make the currentWord string.  Also, make it lower case.
+            currentWord = currentWordMatrix.join('');
+            solutionWord = Movies[movieIndex].movieName;
+
+
+    //Push the current word to the screen
+    document.querySelector("#currentWord").innerHTML = currentWord;
+
             }
 
 
@@ -156,6 +171,20 @@ function gameOver() {
 
 function nextMovie() {
     console.log('Ready for the next movie!');
+
+//movie index + 1, wins + 1 and reset currentWord and solutionWord
+
+    movieIndex++;
+    wins++;
+    x = 15;
+    currentWordMatrix = [];
+    lettersGuessedMatrix = [];
+
+    //Set up the movie text, picture and sound to be for the last word that they just guessed.
+    document.querySelector("#movieText").innerHTML = Movies[movieIndex-1].movieText;
+    document.querySelector("#movieImage").innerHTML = '<img src= ' + Movies[movieIndex-1].moviePicture + '>';
+
+
 }
 
 
