@@ -128,7 +128,6 @@ var lettersGuessedMatrix = [];
             //Completely guessing a word will set up the next movie and increase the win count. 
            
         
-            
             if(currentWord === solutionWord) {
                 nextMovie()
             }
