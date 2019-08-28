@@ -15,9 +15,9 @@ var Braveheart= {
 
 var Deadpool= {
     "movieName" : "deadpool",
-    "movieText" : "Playing: X Gon' Give It To Ya by DMX",
+    "movieText" : "Playing: Careless Whisper by George Michael",
     "moviePicture" : "assets/images/Deadpool.jpg",
-    "movieSound" : "assets/mp3/DMXXGonnaGiveToYa.mp3"
+    "movieSound" : "assets/mp3/CarelessWhisper.mp3"
 };
 
 
