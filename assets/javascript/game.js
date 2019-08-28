@@ -38,10 +38,20 @@ var Jaws= {
 var GameOver = {
     "Text" : "Game Over!",
     "Picture" : "assets/images/gameOver.jpg"
+};
+
+var Victory = {
+    "Text" : "You win!",
+    "Picture" : "assets/images/Victory.jpg"
 }
 
 
-// Set-up necessary variables for wins counter, movies index, number of guesses etc.
+
+
+//Main Process
+//==========================================================================================
+   
+   // Set-up necessary variables for wins counter, movies index, number of guesses etc.
 //==========================================================================================
 
 var Movies = [Initial, Braveheart, Deadpool, Titanic, Jaws];
@@ -66,8 +76,6 @@ for (var k = 0; k < Movies.length; k++) {
 
 //Play initial sound.
 audio[0].play();
-
-
 
 
 // Main Process 
@@ -96,13 +104,77 @@ audio[0].play();
    //Push the current word to the screen
    document.querySelector("#currentWord").innerHTML = currentWord;
 
-    
+   runGame();
+      
+
+// Functions 
+// ========================================================================================
+
+
+// Function that updates the number of wins...
+function updateWins() { 
+    document.querySelector("#wins").innerHTML = "Wins: " + wins;
+}
+
+function reset() {
+
+    // Set-up necessary variables for wins counter, movies index, number of guesses etc.
+//==========================================================================================
+
+
+Movies = [Initial, Braveheart, Deadpool, Titanic, Jaws];
+wins= 0;
+movieIndex = 1;
+x = 15;
+game_over = false;
+
+//Current word is the word on the screen that will change as they are guessing letters. For loop to first clear out the currentWord of the last word variable and then to push underscores to it for the length of the new word.
+currentWordMatrix = [];
+
+//Create an array to store the guessed letters. 
+lettersGuessedMatrix = [];
+
+//Make an array containing all of the audio.
+audio = [];
+audio.length = Movies.length;
+
+for (var k = 0; k < Movies.length; k++) {
+    audio[k] = new Audio(Movies[k].movieSound);
+}
+
+//Play initial sound.
+audio[0].play();
+  
+//Set up the movie text, picture and sound to be for the last word that they just guessed.
+    document.querySelector("#movieText").innerHTML = Movies[movieIndex-1].movieText;
+    document.querySelector("#movieImage").innerHTML = '<img src= ' + Movies[movieIndex-1].moviePicture + '>';
+
+   var blank;
+
+       for (var i = 0; i < Movies[movieIndex].movieName.length; i++)  {
+           blank = "_";
+           currentWordMatrix.push(blank);
+       }
+
+    //Join the currentWordMatrix entries together to make the currentWord string.  Also, make it lower case.
+   currentWord = currentWordMatrix.join('');
+
+   solutionWord = Movies[movieIndex].movieName;
+
+
+   //Push the current word to the screen
+   document.querySelector("#currentWord").innerHTML = currentWord;
+
+   runGame();
+}
+
+function runGame() {
+
+     
    //When user pushes a key, perform various functions. 
 
-       document.onkeydown = function(event) {
-
-        
-       
+    document.onkeydown = function(event) {
+    
         //Converting the keyinput to lower case.  The game won't include upper case letters.
 
             var keyInput = event.key.toLowerCase(); 
@@ -141,6 +213,8 @@ audio[0].play();
             //reduce the allowable guesses count.  If user goes below 0 it's a game over.
        
             if(x <= 0) {
+                audio[movieIndex].pause();
+                audio[movieIndex].currentTime = 0;
                 gameOver()
             }
            
@@ -154,38 +228,63 @@ audio[0].play();
 
             }
 
-            if(currentWord === solutionWord && movieIndex !== Movies.length) {
+            if(currentWord === solutionWord && movieIndex === Movies.length) {
                youWin()  
             }
 
 
         }
 
-     
 
-    
-
-// Functions 
-// ========================================================================================
-
-
-// Function that updates the number of wins...
-function updateWins() { 
-    document.querySelector("#wins").innerHTML = "Wins: " + wins;
 }
 
 function gameOver() {
    
+    audio[movieIndex-1].pause();
+    audio[movieIndex-1].currentTime = 0;
     game_over = true;
     document.querySelector("#movieImage").innerHTML= '<img src= ' + GameOver.Picture + '>';
-    document.querySelector("#movieText").innerHTML = GameOver.Text + " You got " + wins + " out of " + Movies.length + " movies!  Press SpaceBar to restart";
+    document.querySelector("#movieText").innerHTML = GameOver.Text + " You got " + wins + " out of " + (Movies.length-1) + " movies!  Press 'r' to restart";
     document.querySelector("#currentWord").innerHTML = 'Game is Over';
+
+    document.onkeydown = function(event) {
+       
+        //Converting the keyinput to lower case.  The game won't include upper case letters.
+
+            var keyInput = event.key.toLowerCase(); 
+            console.log(keyInput);
+            if (keyInput === 'r') {
+                reset()
+            }
+        }
 }
+
+function youWin() {
+
+    
+    audio[movieIndex-1].pause();
+    audio[movieIndex-1].currentTime = 0;
+    game_over = true;
+    document.querySelector("#movieImage").innerHTML= '<img src= ' + Victory.Picture + '>';
+    document.querySelector("#movieText").innerHTML = Victory.Text + " You got " + wins + " out of " + (Movies.length-1) + " movies!  Press 'r' to restart";
+    document.querySelector("#currentWord").innerHTML = 'You win!';
+
+    document.onkeydown = function(event) {
+       
+        //Converting the keyinput to lower case.  The game won't include upper case letters.
+
+            var keyInput = event.key.toLowerCase(); 
+            console.log(keyInput);
+            if (keyInput === 'r') {
+                reset()
+            }
+        }
+
+}
+
 
 function nextMovie() {
     console.log('Ready for the next movie!');
-
-
 
     audio[movieIndex-1].pause();
     audio[movieIndex-1].currentTime = 0;
