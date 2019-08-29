@@ -1,15 +1,14 @@
 //Programmer: Brennen Bates
 //Date: 8/28/2019
 
-////////////
-//Preface://
-////////////
-
 //I chose to set up the movie options as objects with attributes for the picture, sound and the text that will display under the header at the top.
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//Auxilliary objects: 
 
+//////////////////////
+//Auxilliary objects:/
+//////////////////////
 
 var Initial= {
     "Text" : "Can you guess the movie?",
@@ -29,7 +28,9 @@ var Victory = {
     "Sound" : "assets/mp3/SurvivorEyeoftheTiger.mp3"
 };
 
-//Movie objects:
+/////////////////
+//Movie objects:/
+/////////////////
 
 var Braveheart= {
     "movieName" : "braveheart",
@@ -81,8 +82,8 @@ var Starwars= {
 
 var Movies = shuffle([Braveheart, Deadpool, Titanic, Jaws, Starwars]);
 var Auxiliary = [Initial, GameOver, Victory];
-
 var wins= 0;
+
 //I set the movie index to 1 inidially, bedause I stored the initial webpage settings in the 0 index.
 var movieIndex = 0;
 
@@ -117,13 +118,12 @@ for (var m = 0; m < Auxiliary.length; m++) {
     audioaux[m] = new Audio(Auxiliary[m].Sound);
 }
 
-
 //Play initial sound.  I set it up to play the 20th century fox sound when the web page is opened. 
 audioaux[0].play();
 
-
-// Main Process 
-// ==========================================================================================
+////////////////
+//Main Process//
+////////////////
 
   
 //Set up the initial web page info. 
@@ -146,9 +146,9 @@ document.querySelector("#currentWord").innerHTML = currentWord;
 //Start up the game 
 runGame();
       
-
-// Functions 
-// ========================================================================================
+/////////////
+//Functions//
+/////////////
 
 
 function runGame() {
@@ -334,7 +334,6 @@ document.querySelector("#wins").innerHTML = wins;
         }
 
 }
-
 
 function nextMovie() {
 
