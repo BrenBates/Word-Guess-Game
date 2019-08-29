@@ -195,6 +195,13 @@ function runGame() {
      
              //Completely guessing a word will set up the next movie and increase the win count. 
             
+            }
+
+
+            //On key up, evaluate if a new movie needs loaded, or to load the victory sequence.  
+
+
+             document.onkeyup = function(event) {
          
              if(currentWord === solutionWord && movieIndex !== Movies.length && game_over === false) {
                  nextMovie()  
@@ -204,7 +211,7 @@ function runGame() {
                  youWin()  
               }
 
-         }
+        
  
  
  }
