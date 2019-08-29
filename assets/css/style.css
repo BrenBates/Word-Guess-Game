@@ -1,5 +1,4 @@
 
-
 img { 
     width: 100%;
     height: auto;
@@ -9,4 +8,11 @@ img {
     letter-spacing: 5px;
 }
 
+body {
+    background-color: #F5F1ED ;
+}
 
+.jumbotron { 
+    background-color: #70798C;
+    font-family: 'Gloria Hallelujah', cursive;
+}
