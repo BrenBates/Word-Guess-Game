@@ -9,10 +9,29 @@ img {
 }
 
 body {
+    background-image: url("../images/Moviebackgroundimage.jpg");
+    
+    background-size: cover;
     background-color: #F5F1ED ;
+   
 }
+
+.card { 
+    background-color: #F5F1ED ;
+    text-align: center;
+    font-size: 25px;
+    width: 60%;
+    border: 3px dotted;
+    
+}
+
 
 .jumbotron { 
     background-color: #70798C;
     font-family: 'Gloria Hallelujah', cursive;
+}
+
+#movieImage { 
+    width: 100%;
+    margin: auto;
 }
