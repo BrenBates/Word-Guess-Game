@@ -142,12 +142,15 @@ function runGame() {
     //When user pushes a key, perform various functions. 
  
      document.onkeydown = function(event) {
+
+        //Get rid of the "Press Any Key to Get Started" text since they are now started.
+            document.querySelector("#startGame").innerHTML = "";
      
          //Converting the keyinput to lower case.  The game won't include upper case letters.
  
              var keyInput = event.key.toLowerCase(); 
            
-            document.querySelector("#guessLetter").innerHTML = keyInput
+            document.querySelector("#guessLetter").innerHTML = keyInput;
            
             document.querySelector("#guessesRemaining").innerHTML = x;
  
