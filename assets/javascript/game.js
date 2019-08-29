@@ -120,10 +120,6 @@ audio[0].play();
 // ========================================================================================
 
 
-// Function that updates the number of wins...
-function updateWins() { 
-    document.querySelector("#wins").innerHTML = "Wins: " + wins;
-}
 
 function reset() {
 
