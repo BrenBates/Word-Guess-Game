@@ -66,7 +66,7 @@ var Victory = {
 var Movies = [Initial, Braveheart, Deadpool, Titanic, Jaws, Starwars];
 var wins= 0;
 var movieIndex = 1;
-var x = 10;
+var x = 15;
 var game_over = false;
 
 //Current word is the word on the screen that will change as they are guessing letters. For loop to first clear out the currentWord of the last word variable and then to push underscores to it for the length of the new word.
@@ -113,6 +113,7 @@ audio[0].play();
    //Push the current word to the screen
    document.querySelector("#currentWord").innerHTML = currentWord;
 
+   //Start up the game 
    runGame();
       
 
@@ -131,7 +132,7 @@ function reset() {
 Movies = [Initial, Braveheart, Deadpool, Titanic, Jaws];
 wins= 0;
 movieIndex = 1;
-x = 10;
+x = 15;
 game_over = false;
 
 //Current word is the word on the screen that will change as they are guessing letters. For loop to first clear out the currentWord of the last word variable and then to push underscores to it for the length of the new word.
@@ -175,15 +176,10 @@ audio[0].play();
 }
 
 function runGame() {
-
-
-  
      
    //When user pushes a key, perform various functions. 
 
     document.onkeydown = function(event) {
-
-       
     
         //Converting the keyinput to lower case.  The game won't include upper case letters.
 
@@ -316,7 +312,7 @@ function nextMovie() {
     movieIndex++;
     wins++;
     document.querySelector("#wins").innerHTML = wins;
-    x = 10;
+    x = 15;
     currentWordMatrix = [];
     lettersGuessedMatrix = [];
 
