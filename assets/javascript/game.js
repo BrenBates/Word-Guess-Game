@@ -205,13 +205,8 @@ function runGame() {
                  audio[movieIndex].currentTime = 0;
                  gameOver()
              }
-            
      
              //Completely guessing a word will set up the next movie and increase the win count. 
-
-             console.log(wins);
-             console.log(movieIndex);
-             console.log(Movies.length);
             
 
              if(currentWord === solutionWord && movieIndex === (Movies.length-1)) {
@@ -222,7 +217,6 @@ function runGame() {
                 nextMovie() 
              }
  
-           
             }
             
  
@@ -344,8 +338,6 @@ document.querySelector("#wins").innerHTML = wins;
 
 function nextMovie() {
 
-
-console.log(movieIndex);
 
 //Reset remaining guesses, currentWord and solution word.  
 x = 15;
