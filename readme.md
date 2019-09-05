@@ -6,3 +6,5 @@ This project creates a word guessing game with the theme of movies. The bulk of 
 Who maintains and contributes to the project
 
 Brennen Bates - Original Date 8/29/2019
+
+Try it out here: https://brenbates.github.io/Word-Guess-Game/
