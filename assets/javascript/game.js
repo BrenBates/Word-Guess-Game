@@ -223,7 +223,43 @@ function runGame() {
  }
 
 function reset() {
-    location.reload();
+    // Reset necessary variables for wins counter, movies index, number of guesses etc.
+//==========================================================================================
+
+wins= 0;
+movieIndex = 0;
+x = 15;
+game_over = false;
+
+//Reset arrays.
+currentWordMatrix = [];
+lettersGuessedMatrix = [];
+
+//Play initial sound.
+audioaux[0].play();
+
+//Reset image and text. 
+
+document.querySelector("#movieText").innerHTML = Auxiliary[0].Text;
+document.querySelector("#movieImage").innerHTML = '<img src= ' + Auxiliary[0].Picture + '>';
+
+//Reset 'Current' and 'Solution' words. 
+   var blank;
+
+       for (var i = 0; i < Movies[movieIndex].movieName.length; i++)  {
+           blank = "_";
+           currentWordMatrix.push(blank);
+       }
+
+currentWord = currentWordMatrix.join('');
+solutionWord = Movies[movieIndex].movieName;
+
+
+//Push the current word to the screen
+document.querySelector("#currentWord").innerHTML = currentWord;
+
+//Run game again now that everything is setup.
+runGame();
 }
 
 function gameOver() {
